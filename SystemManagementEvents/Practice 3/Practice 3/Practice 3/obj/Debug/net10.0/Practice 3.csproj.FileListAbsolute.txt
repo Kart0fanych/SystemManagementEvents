@@ -1,0 +1,29 @@
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\obj\Debug\net10.0\Practice 3.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\obj\Debug\net10.0\Practice 3.AssemblyInfoInputs.cache
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\obj\Debug\net10.0\Practice 3.AssemblyInfo.cs
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\obj\Debug\net10.0\Practice 3.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\obj\Debug\net10.0\Practice 3.sourcelink.json
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\bin\Debug\net10.0\Practice 3.exe
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\bin\Debug\net10.0\Practice 3.deps.json
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\bin\Debug\net10.0\Practice 3.runtimeconfig.json
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\bin\Debug\net10.0\Practice 3.dll
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\bin\Debug\net10.0\Practice 3.pdb
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\obj\Debug\net10.0\Practice 3.dll
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\obj\Debug\net10.0\refint\Practice 3.dll
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\obj\Debug\net10.0\Practice 3.pdb
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\obj\Debug\net10.0\Practice 3.genruntimeconfig.cache
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\obj\Debug\net10.0\ref\Practice 3.dll
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\obj\Debug\net10.0\Practice 3.csproj.Up2Date
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\bin\Debug\net10.0\Microsoft.Extensions.Configuration.dll
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\bin\Debug\net10.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\bin\Debug\net10.0\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\bin\Debug\net10.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\bin\Debug\net10.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\bin\Debug\net10.0\Microsoft.Extensions.Logging.dll
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\bin\Debug\net10.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\bin\Debug\net10.0\Microsoft.Extensions.Logging.Configuration.dll
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\bin\Debug\net10.0\Microsoft.Extensions.Logging.Console.dll
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\bin\Debug\net10.0\Microsoft.Extensions.Options.dll
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\bin\Debug\net10.0\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\bin\Debug\net10.0\Microsoft.Extensions.Primitives.dll
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\Practice 3\Practice 3\Practice 3\obj\Debug\net10.0\Practice 3.csproj.AssemblyReference.cache
