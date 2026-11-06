@@ -1,0 +1,6 @@
+@EventsApi_PR4_HostAddress = http://localhost:5289
+
+GET {{EventsApi_PR4_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
