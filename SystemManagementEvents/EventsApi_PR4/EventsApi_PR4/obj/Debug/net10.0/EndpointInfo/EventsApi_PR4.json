@@ -10,9 +10,10 @@
         "tags": [
           "Events"
         ],
+        "summary": "Получает список всех мероприятий.",
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Список успешно получен.",
             "content": {
               "text/plain": {
                 "schema": {
@@ -46,7 +47,9 @@
         "tags": [
           "Events"
         ],
+        "summary": "Создаёт новое мероприятие.",
         "requestBody": {
+          "description": "Данные нового мероприятия.",
           "content": {
             "application/json": {
               "schema": {
@@ -66,8 +69,8 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "OK",
+          "201": {
+            "description": "Мероприятие успешно создано.",
             "content": {
               "text/plain": {
                 "schema": {
@@ -82,6 +85,46 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Переданы некорректные данные.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Аудитория уже занята мероприятием на указанную дату.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
                 }
               }
             }
@@ -94,10 +137,12 @@
         "tags": [
           "Events"
         ],
+        "summary": "Получает информацию о мероприятии по его идентификатору.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "Уникальный идентификатор мероприятия.",
             "required": true,
             "schema": {
               "type": "integer",
@@ -107,7 +152,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Мероприятие найдено.",
             "content": {
               "text/plain": {
                 "schema": {
@@ -125,6 +170,26 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "Мероприятие с указанным идентификатором не найдено.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       },
@@ -132,10 +197,12 @@
         "tags": [
           "Events"
         ],
+        "summary": "Удаляет мероприятие по его идентификатору.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "Идентификатор удаляемого мероприятия.",
             "required": true,
             "schema": {
               "type": "integer",
@@ -144,8 +211,28 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "204": {
+            "description": "Мероприятие успешно удалено."
+          },
+          "404": {
+            "description": "Мероприятие не найдено.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -164,58 +251,98 @@
           "title": {
             "maxLength": 150,
             "minLength": 5,
-            "type": "string"
+            "type": "string",
+            "description": "Название мероприятия.\r\n<example>День открытых дверей</example>"
           },
           "date": {
             "type": "string",
+            "description": "Дата проведения мероприятия.\r\n<example>2026-12-15T10:00:00</example>",
             "format": "date-time"
           },
           "room": {
             "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "description": "Название аудитории.\r\n<example>Аудитория 214</example>"
           },
           "maxParticipants": {
             "maximum": 500,
             "minimum": 1,
             "type": "integer",
+            "description": "Максимальное количество участников.\r\n<example>80</example>",
             "format": "int32"
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "Содержит данные для создания нового мероприятия."
       },
       "Event": {
         "type": "object",
         "properties": {
           "id": {
             "type": "integer",
+            "description": "Уникальный идентификатор мероприятия.",
             "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "description": "Название мероприятия.",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "description": "Дата проведения мероприятия.",
+            "format": "date-time"
+          },
+          "room": {
+            "type": "string",
+            "description": "Аудитория, в которой проводится мероприятие.",
+            "nullable": true
+          },
+          "maxParticipants": {
+            "type": "integer",
+            "description": "Максимальное количество участников.",
+            "format": "int32"
+          },
+          "status": {
+            "type": "string",
+            "description": "Текущий статус мероприятия.",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Дата и время создания записи.",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Представляет мероприятие образовательной организации."
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
           },
           "title": {
             "type": "string",
             "nullable": true
           },
-          "date": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "room": {
-            "type": "string",
-            "nullable": true
-          },
-          "maxParticipants": {
-            "type": "integer",
-            "format": "int32"
-          },
           "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
             "type": "string",
             "nullable": true
           },
-          "createdAt": {
+          "instance": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": { }
       }
     }
   },

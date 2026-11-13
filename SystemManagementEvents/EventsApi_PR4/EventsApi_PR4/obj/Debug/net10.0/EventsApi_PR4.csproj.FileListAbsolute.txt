@@ -36,3 +36,5 @@ C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemMa
 C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\EventsApi_PR4\EventsApi_PR4\obj\Debug\net10.0\EventsApi_PR4.pdb
 C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\EventsApi_PR4\EventsApi_PR4\obj\Debug\net10.0\EventsApi_PR4.genruntimeconfig.cache
 C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\EventsApi_PR4\EventsApi_PR4\obj\Debug\net10.0\ref\EventsApi_PR4.dll
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\EventsApi_PR4\EventsApi_PR4\bin\Debug\net10.0\EventsApi_PR4.xml
+C:\Users\Lenovo\Documents\Tехнологии разработки ПО\SystemManagementEvents\EventsApi_PR4\EventsApi_PR4\obj\Debug\net10.0\EventsApi_PR4.xml

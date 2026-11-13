@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="EventsApi_PR4/EventsApi_PR4.csproj" />
+  <Project Path="EventsClient/EventsClient.csproj" Id="e8c7a019-20e3-467b-804c-25faf5d7f526" />
 </Solution>
