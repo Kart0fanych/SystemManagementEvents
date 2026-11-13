@@ -262,14 +262,14 @@
             // manualMenuItem
             // 
             manualMenuItem.Name = "manualMenuItem";
-            manualMenuItem.Size = new Size(345, 34);
-            manualMenuItem.Text = "Руководство пользователья";
+            manualMenuItem.Size = new Size(336, 34);
+            manualMenuItem.Text = "Руководство пользователя";
             manualMenuItem.Click += manualMenuItem_Click;
             // 
             // aboutMenuItem
             // 
             aboutMenuItem.Name = "aboutMenuItem";
-            aboutMenuItem.Size = new Size(345, 34);
+            aboutMenuItem.Size = new Size(336, 34);
             aboutMenuItem.Text = "О программе";
             aboutMenuItem.Click += aboutMenuItem_Click;
             // 
