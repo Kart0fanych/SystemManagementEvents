@@ -54,28 +54,27 @@
             // 
             // label3
             // 
-            label3.Location = new Point(12, 88);
+            label3.Location = new Point(16, 95);
             label3.Name = "label3";
-            label3.Size = new Size(370, 50);
+            label3.Size = new Size(370, 76);
             label3.TabIndex = 2;
             label3.Text = "Приложение для управления мероприятиями образовательной организации.";
             label3.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // closeButton
             // 
-            closeButton.Location = new Point(134, 148);
+            closeButton.Location = new Point(134, 174);
             closeButton.Name = "closeButton";
             closeButton.Size = new Size(112, 34);
             closeButton.TabIndex = 3;
             closeButton.Text = "Закрыть";
             closeButton.UseVisualStyleBackColor = true;
-            closeButton.Click += closeButton_Click;
             // 
             // AboutForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(398, 194);
+            ClientSize = new Size(398, 214);
             Controls.Add(closeButton);
             Controls.Add(label3);
             Controls.Add(label2);

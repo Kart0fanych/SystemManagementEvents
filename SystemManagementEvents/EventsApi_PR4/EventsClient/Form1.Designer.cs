@@ -300,7 +300,7 @@
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "MainForm";
-            Text = "Form1";
+            Text = "Система управления мероприятиями образовательной организации.";
             ((System.ComponentModel.ISupportInitialize)eventsGrid).EndInit();
             ((System.ComponentModel.ISupportInitialize)maxParticipantsNumeric).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
