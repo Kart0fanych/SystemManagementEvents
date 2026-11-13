@@ -159,6 +159,9 @@ namespace EventsClient
                     // Обновляем таблицу
                     var events = await _apiClient.GetEventsAsync();
                     eventsGrid.DataSource = events;
+                    _loadedEvents = events;
+                    eventsGrid.DataSource = null;
+                    eventsGrid.DataSource = _loadedEvents.ToList();
                 }
                 else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
                 {

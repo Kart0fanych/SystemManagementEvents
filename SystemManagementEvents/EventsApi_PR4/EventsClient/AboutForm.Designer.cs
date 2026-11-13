@@ -67,7 +67,7 @@
             closeButton.Name = "closeButton";
             closeButton.Size = new Size(112, 34);
             closeButton.TabIndex = 3;
-            closeButton.Text = "Close";
+            closeButton.Text = "Закрыть";
             closeButton.UseVisualStyleBackColor = true;
             closeButton.Click += closeButton_Click;
             // 

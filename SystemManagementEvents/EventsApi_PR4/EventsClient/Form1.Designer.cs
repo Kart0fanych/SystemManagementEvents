@@ -80,7 +80,7 @@
             loadButton.Name = "loadButton";
             loadButton.Size = new Size(112, 34);
             loadButton.TabIndex = 1;
-            loadButton.Text = "Load";
+            loadButton.Text = "Загрузить";
             loadButton.UseVisualStyleBackColor = true;
             loadButton.Click += loadButton_Click;
             // 
@@ -91,7 +91,7 @@
             cancelButton.Name = "cancelButton";
             cancelButton.Size = new Size(112, 34);
             cancelButton.TabIndex = 2;
-            cancelButton.Text = "Cancel";
+            cancelButton.Text = "Отмена";
             cancelButton.UseVisualStyleBackColor = true;
             cancelButton.Click += cancelButton_Click;
             // 
@@ -101,7 +101,7 @@
             addButton.Name = "addButton";
             addButton.Size = new Size(112, 34);
             addButton.TabIndex = 3;
-            addButton.Text = "Add";
+            addButton.Text = "Добавить";
             addButton.UseVisualStyleBackColor = true;
             addButton.Click += addButton_Click;
             // 
@@ -160,8 +160,9 @@
             syncLoadButton.Name = "syncLoadButton";
             syncLoadButton.Size = new Size(283, 34);
             syncLoadButton.TabIndex = 10;
-            syncLoadButton.Text = "Эксперимент с блокировкой";
+            syncLoadButton.Text = "Эксперимент";
             syncLoadButton.UseVisualStyleBackColor = true;
+            syncLoadButton.Visible = false;
             syncLoadButton.Click += syncLoadButton_Click;
             // 
             // searchTextBox
@@ -178,7 +179,7 @@
             searchButton.Name = "searchButton";
             searchButton.Size = new Size(112, 34);
             searchButton.TabIndex = 12;
-            searchButton.Text = "Find";
+            searchButton.Text = "Поиск";
             searchButton.UseVisualStyleBackColor = true;
             searchButton.Click += searchButton_Click;
             // 
@@ -188,7 +189,7 @@
             resetSearchButton.Name = "resetSearchButton";
             resetSearchButton.Size = new Size(112, 34);
             resetSearchButton.TabIndex = 13;
-            resetSearchButton.Text = "Reset";
+            resetSearchButton.Text = "Сброс";
             resetSearchButton.UseVisualStyleBackColor = true;
             resetSearchButton.Click += resetSearchButton_Click;
             // 

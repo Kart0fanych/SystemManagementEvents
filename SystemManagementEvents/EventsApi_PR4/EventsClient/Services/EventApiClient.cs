@@ -20,7 +20,6 @@ public class EventApiClient
     public async Task<List<EventDTO>> GetEventsAsync(
         CancellationToken cancellationToken = default)
     {
-        await Task.Delay(5000, cancellationToken);
         return await _httpClient.GetFromJsonAsync<List<EventDTO>>(
             "api/events", cancellationToken) ?? [];
     }
