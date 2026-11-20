@@ -1,7 +1,7 @@
 using EventsClient.Models;
 using EventsClient.Services;
 using System.Net.Http;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Diagnostics;
 
 namespace EventsClient
 {
@@ -9,7 +9,12 @@ namespace EventsClient
     {
         private CancellationTokenSource? _loadCts;
         private readonly EventApiClient _apiClient = new();
-        private List<EventDTO> _loadedEvents = new();
+        private List<EventListItemDTO> _loadedEvents = new();
+
+        private int _currentPage = 1;
+        private const int PageSize = 50;
+        private int _totalPages = 1;
+        private int _totalEvents;
         public MainForm()
         {
             InitializeComponent();
@@ -35,21 +40,31 @@ namespace EventsClient
 
             try
             {
-                var events = await _apiClient.GetEventsAsync(cts.Token);
+                var totalTimer = Stopwatch.StartNew();
 
-                _loadedEvents = events;
-                eventsGrid.DataSource = null;
-                eventsGrid.DataSource = _loadedEvents.ToList();
+                var requestTimer = Stopwatch.StartNew();
 
-                eventsGrid.Columns[nameof(EventDTO.Id)].HeaderText = "ID";
-                eventsGrid.Columns[nameof(EventDTO.Title)].HeaderText = "Название";
-                eventsGrid.Columns[nameof(EventDTO.Date)].HeaderText = "Дата";
-                eventsGrid.Columns[nameof(EventDTO.Room)].HeaderText = "Аудитория";
-                eventsGrid.Columns[nameof(EventDTO.MaxParticipants)].HeaderText = "Максимум участников";
-                eventsGrid.Columns[nameof(EventDTO.Status)].HeaderText = "Статус";
-                eventsGrid.Columns[nameof(EventDTO.CreatedAt)].HeaderText = "Создано";
+                _currentPage = 1;
+                var result = await _apiClient.GetEventsAsync(
+                    _currentPage, PageSize, cts.Token);
 
-                statusLabel.Text = $"Загружено записей: {events.Count}";
+                requestTimer.Stop();
+
+                var bindingTimer = Stopwatch.StartNew();
+
+                DisplayPage(result);
+
+                bindingTimer.Stop();
+                totalTimer.Stop();
+
+                int first = (_currentPage - 1) * PageSize + 1;
+                int last = first + _loadedEvents.Count - 1;
+
+                statusLabel.Text =
+                    $"Показано: {first}–{last} из {result.Total} | " +
+                    $"API: {requestTimer.Elapsed.TotalMilliseconds:F2} мс | " +
+                    $"Таблица: {bindingTimer.Elapsed.TotalMilliseconds:F2} мс | " +
+                    $"Всего: {totalTimer.Elapsed.TotalMilliseconds:F2} мс";
             }
             catch (OperationCanceledException) when (cts.IsCancellationRequested)
             {
@@ -156,12 +171,9 @@ namespace EventsClient
 
                     statusLabel.Text = "Мероприятие создано";
 
-                    // Обновляем таблицу
-                    var events = await _apiClient.GetEventsAsync();
-                    eventsGrid.DataSource = events;
-                    _loadedEvents = events;
-                    eventsGrid.DataSource = null;
-                    eventsGrid.DataSource = _loadedEvents.ToList();
+                    // Обновляем первую страницу
+                    _currentPage = 1;
+                    await LoadPageAsync();
                 }
                 else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
                 {
@@ -277,7 +289,10 @@ namespace EventsClient
             eventsGrid.DataSource = null;
             eventsGrid.DataSource = _loadedEvents.ToList();
 
-            statusLabel.Text = $"Загружено записей: {_loadedEvents.Count}";
+            int first = (_currentPage - 1) * PageSize + 1;
+            int last = first + _loadedEvents.Count - 1;
+
+            statusLabel.Text = $"Показано: {first}–{last} из {_totalEvents}";
         }
         private void SetupHelp()
         {
@@ -413,6 +428,59 @@ namespace EventsClient
                     "Ошибка",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+            }
+        }
+        private async Task LoadPageAsync(CancellationToken cancellationToken = default)
+        {
+            var result = await _apiClient.GetEventsAsync(
+                _currentPage, PageSize, cancellationToken);
+
+            DisplayPage(result);
+        }
+        private void DisplayPage(PagedResult<EventListItemDTO> result)
+        {
+            _loadedEvents = result.Items;
+            _totalEvents = result.Total;
+
+            _totalPages = Math.Max(
+                1,
+                (int)Math.Ceiling((double)result.Total / result.PageSize));
+            eventsGrid.DataSource = null;
+            eventsGrid.DataSource = _loadedEvents.ToList();
+
+            eventsGrid.Columns[nameof(EventListItemDTO.Id)].HeaderText = "ID";
+            eventsGrid.Columns[nameof(EventListItemDTO.Title)].HeaderText = "Название";
+            eventsGrid.Columns[nameof(EventListItemDTO.Date)].HeaderText = "Дата";
+            eventsGrid.Columns[nameof(EventListItemDTO.Room)].HeaderText = "Аудитория";
+            eventsGrid.Columns[nameof(EventListItemDTO.MaxParticipants)].HeaderText =
+                "Максимум участников";
+            eventsGrid.Columns[nameof(EventListItemDTO.Status)].HeaderText = "Статус";
+
+            pageLabel.Text = $"Страница {_currentPage} из {_totalPages}";
+
+            previousPageButton.Enabled = _currentPage > 1;
+            nextPageButton.Enabled = _currentPage < _totalPages;
+
+            int first = (_currentPage - 1) * result.PageSize + 1;
+            int last = first + _loadedEvents.Count - 1;
+
+            statusLabel.Text = $"Показано: {first}–{last} из {result.Total}";
+        }
+        private async void previousPageButton_Click(object sender, EventArgs e)
+        {
+            if (_currentPage > 1)
+            {
+                _currentPage--;
+                await LoadPageAsync();
+            }
+        }
+
+        private async void nextPageButton_Click(object sender, EventArgs e)
+        {
+            if (_currentPage < _totalPages)
+            {
+                _currentPage++;
+                await LoadPageAsync();
             }
         }
     }

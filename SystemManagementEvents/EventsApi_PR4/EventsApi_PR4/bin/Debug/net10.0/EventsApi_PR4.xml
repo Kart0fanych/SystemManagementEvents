@@ -9,12 +9,13 @@
             Предоставляет методы для просмотра и управления мероприятиями.
             </summary>
         </member>
-        <member name="M:EventsApi.Controllers.EventsController.GetAll(System.Threading.CancellationToken)">
+        <member name="M:EventsApi.Controllers.EventsController.GetAll(System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>
-            Получает список всех мероприятий.
+            Получает страницу мероприятий.
             </summary>
-            <returns>Список мероприятий.</returns>
-            <response code="200">Список успешно получен.</response>
+            <param name="page">Номер страницы.</param>
+            <param name="pageSize">Количество записей на странице.</param>
+            <param name="cancellationToken">Токен отмены запроса.</param>
         </member>
         <member name="M:EventsApi.Controllers.EventsController.GetById(System.Int32,System.Threading.CancellationToken)">
             <summary>
@@ -45,6 +46,11 @@
             <param name="cancellationToken">Токен отмены запроса.</param>
             <response code="204">Мероприятие успешно удалено.</response>
             <response code="404">Мероприятие не найдено.</response>
+        </member>
+        <member name="M:EventsApi.Controllers.EventsController.GetStatuses">
+            <summary>
+            Получает список допустимых статусов мероприятий.
+            </summary>
         </member>
         <member name="T:EventsApi.Models.CreateEventRequest">
             <summary>

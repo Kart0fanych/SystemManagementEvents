@@ -17,11 +17,15 @@ public class EventApiClient
         _httpClient.Timeout = TimeSpan.FromSeconds(10);
     }
 
-    public async Task<List<EventDTO>> GetEventsAsync(
+    public async Task<PagedResult<EventListItemDTO>> GetEventsAsync(
+        int page,
+        int pageSize,
         CancellationToken cancellationToken = default)
     {
-        return await _httpClient.GetFromJsonAsync<List<EventDTO>>(
-            "api/events", cancellationToken) ?? [];
+        return await _httpClient.GetFromJsonAsync<PagedResult<EventListItemDTO>>(
+            $"api/events?page={page}&pageSize={pageSize}",
+            cancellationToken)
+            ?? new PagedResult<EventListItemDTO>();
     }
 
     public async Task<HttpResponseMessage> CreateEventAsync(

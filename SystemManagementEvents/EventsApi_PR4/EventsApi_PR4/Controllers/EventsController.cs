@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using EventsApi.Data;
 using EventsApi.Models;
-
+using EventsApi.Services;
 namespace EventsApi.Controllers;
 
 /// <summary>
@@ -13,27 +13,57 @@ public class EventsController : ControllerBase
 {
     private readonly IEventRepository _repository;
     private readonly ILogger<EventsController> _logger;
+    private readonly EventStatusService _statusService;
 
     public EventsController(
         IEventRepository repository,
-        ILogger<EventsController> logger)
+        ILogger<EventsController> logger,
+        EventStatusService statusService)
     {
         _repository = repository;
         _logger = logger;
+        _statusService = statusService;
     }
 
     /// <summary>
-    /// Получает список всех мероприятий.
+    /// Получает страницу мероприятий.
     /// </summary>
-    /// <returns>Список мероприятий.</returns>
-    /// <response code="200">Список успешно получен.</response>
+    /// <param name="page">Номер страницы.</param>
+    /// <param name="pageSize">Количество записей на странице.</param>
+    /// <param name="cancellationToken">Токен отмены запроса.</param>
     [HttpGet]
-    [ProducesResponseType(typeof(List<Event>), StatusCodes.Status200OK)]
-    public async Task<ActionResult<IReadOnlyList<Event>>> GetAll(
-        CancellationToken cancellationToken)
+    [ProducesResponseType(typeof(PagedResult<EventListItemDTO>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<PagedResult<EventListItemDTO>>> GetAll(
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 50,
+        CancellationToken cancellationToken = default)
     {
-        var items = await _repository.GetAllAsync(cancellationToken);
-        return Ok(items);
+        page = Math.Max(1, page);
+        pageSize = Math.Clamp(pageSize, 1, 200);
+
+        int total = await _repository.CountAsync(cancellationToken);
+
+        var items = await _repository.GetPageAsync(
+            page, pageSize, cancellationToken);
+
+        var result = new PagedResult<EventListItemDTO>
+        {
+            Items = items.Select(e => new EventListItemDTO
+            {
+                Id = e.Id,
+                Title = e.Title,
+                Date = e.Date,
+                Room = e.Room,
+                MaxParticipants = e.MaxParticipants,
+                Status = e.Status
+            }).ToList(),
+
+            Total = total,
+            Page = page,
+            PageSize = pageSize
+        };
+
+        return Ok(result);
     }
 
     /// <summary>
@@ -123,5 +153,14 @@ public class EventsController : ControllerBase
         bool deleted = await _repository.DeleteAsync(id, cancellationToken);
 
         return deleted ? NoContent() : NotFound();
+    }
+    /// <summary>
+    /// Получает список допустимых статусов мероприятий.
+    /// </summary>
+    [HttpGet("statuses")]
+    [ProducesResponseType(typeof(IReadOnlyList<string>), StatusCodes.Status200OK)]
+    public ActionResult<IReadOnlyList<string>> GetStatuses()
+    {
+        return Ok(_statusService.GetStatuses());
     }
 }

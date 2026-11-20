@@ -55,6 +55,9 @@
             справкаToolStripMenuItem = new ToolStripMenuItem();
             manualMenuItem = new ToolStripMenuItem();
             aboutMenuItem = new ToolStripMenuItem();
+            previousPageButton = new Button();
+            nextPageButton = new Button();
+            pageLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)eventsGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)maxParticipantsNumeric).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
@@ -273,11 +276,43 @@
             aboutMenuItem.Text = "О программе";
             aboutMenuItem.Click += aboutMenuItem_Click;
             // 
+            // previousPageButton
+            // 
+            previousPageButton.Location = new Point(913, 644);
+            previousPageButton.Name = "previousPageButton";
+            previousPageButton.Size = new Size(68, 34);
+            previousPageButton.TabIndex = 20;
+            previousPageButton.Text = "◀ ";
+            previousPageButton.UseVisualStyleBackColor = true;
+            previousPageButton.Click += previousPageButton_Click;
+            // 
+            // nextPageButton
+            // 
+            nextPageButton.Location = new Point(1169, 644);
+            nextPageButton.Name = "nextPageButton";
+            nextPageButton.Size = new Size(68, 34);
+            nextPageButton.TabIndex = 21;
+            nextPageButton.Text = " ▶";
+            nextPageButton.UseVisualStyleBackColor = true;
+            nextPageButton.Click += nextPageButton_Click;
+            // 
+            // pageLabel
+            // 
+            pageLabel.AutoSize = true;
+            pageLabel.Location = new Point(1007, 649);
+            pageLabel.Name = "pageLabel";
+            pageLabel.Size = new Size(143, 25);
+            pageLabel.TabIndex = 22;
+            pageLabel.Text = "Страница 1 из 1";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1249, 690);
+            Controls.Add(pageLabel);
+            Controls.Add(nextPageButton);
+            Controls.Add(previousPageButton);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -338,5 +373,8 @@
         private ToolStripMenuItem справкаToolStripMenuItem;
         private ToolStripMenuItem manualMenuItem;
         private ToolStripMenuItem aboutMenuItem;
+        private Button nextPageButton;
+        private Button previousPageButton;
+        private Label pageLabel;
     }
 }

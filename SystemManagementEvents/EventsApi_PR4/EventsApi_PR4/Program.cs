@@ -1,4 +1,6 @@
+
 using EventsApi.Data;
+using EventsApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,10 @@ builder.Services.AddSwaggerGen(options =>
 
     options.IncludeXmlComments(xmlPath);
 });
+
+builder.Services.AddMemoryCache();
+builder.Services.AddSingleton<EventStatusService>();
+
 builder.Services.AddSingleton<IEventRepository, InMemoryEventRepository>();
 
 var app = builder.Build();

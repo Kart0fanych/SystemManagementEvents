@@ -15,4 +15,11 @@ public interface IEventRepository
 
     Task<bool> DeleteAsync(
         int id, CancellationToken cancellationToken = default);
+    Task<int> CountAsync(
+    CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyList<Event>> GetPageAsync(
+        int page,
+        int pageSize,
+        CancellationToken cancellationToken = default);
 }

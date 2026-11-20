@@ -1,9 +1,10 @@
 ﻿using EventsApi.Models;
-
+using System.Diagnostics;
 namespace EventsApi.Data;
 
 public class InMemoryEventRepository : IEventRepository
 {
+    private readonly Dictionary<int, Event> _byId = new();
     private readonly List<Event> _items =
     [
         new()
@@ -38,6 +39,34 @@ public class InMemoryEventRepository : IEventRepository
     private readonly object _sync = new();
     private int _nextId = 4;
 
+    public InMemoryEventRepository()
+    {
+        for (int i = 4; i <= 2000; i++)
+        {
+            _items.Add(new Event
+            {
+                Id = i,
+                Title = $"Тестовое мероприятие № {i}",
+                Date = new DateTime(2026, 1, 1).AddDays(i % 365),
+                Room = $"Аудитория {100 + i % 50}",
+                MaxParticipants = 20 + i % 181,
+                Status = i % 3 == 0
+                    ? "Опубликовано"
+                    : i % 3 == 1
+                        ? "Черновик"
+                        : "Завершено",
+                CreatedAt = DateTime.Now.AddMinutes(-i)
+            });
+        }
+
+        foreach (var item in _items)
+        {
+            _byId[item.Id] = item;
+        }
+
+        _nextId = 2001;
+    }
+
     public Task<IReadOnlyList<Event>> GetAllAsync(
         CancellationToken cancellationToken = default)
     {
@@ -52,28 +81,62 @@ public class InMemoryEventRepository : IEventRepository
     {
         lock (_sync)
         {
-            return Task.FromResult(_items.FirstOrDefault(e => e.Id == id));
+            _byId.TryGetValue(id, out var item);
+            return Task.FromResult(item);
         }
     }
 
     public Task<Event> AddAsync(
-        Event item, CancellationToken cancellationToken = default)
+    Event item, CancellationToken cancellationToken = default)
     {
         lock (_sync)
         {
             item.Id = _nextId++;
             _items.Add(item);
+            _byId[item.Id] = item;
+
             return Task.FromResult(item);
         }
     }
 
     public Task<bool> DeleteAsync(
-        int id, CancellationToken cancellationToken = default)
+    int id, CancellationToken cancellationToken = default)
     {
         lock (_sync)
         {
-            int removed = _items.RemoveAll(e => e.Id == id);
-            return Task.FromResult(removed > 0);
+            if (!_byId.TryGetValue(id, out var item))
+                return Task.FromResult(false);
+
+            _byId.Remove(id);
+            _items.Remove(item);
+
+            return Task.FromResult(true);
+        }
+    }
+    public Task<int> CountAsync(
+    CancellationToken cancellationToken = default)
+    {
+        lock (_sync)
+        {
+            return Task.FromResult(_items.Count);
+        }
+    }
+
+    public Task<IReadOnlyList<Event>> GetPageAsync(
+        int page,
+        int pageSize,
+        CancellationToken cancellationToken = default)
+    {
+        lock (_sync)
+        {
+            IReadOnlyList<Event> items = _items
+                .OrderBy(e => e.Date)
+                .ThenBy(e => e.Id)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            return Task.FromResult(items);
         }
     }
 }
